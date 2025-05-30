@@ -4,6 +4,11 @@ read -p "Enter your domain (e.g., panel.example.com): " domain
 
 config_path="/etc/nginx/sites-available/pterodactyl.conf"
 
+if [ -f /etc/nginx/sites-enabled/default ]; then
+    echo "Removing default Nginx site..."
+    sudo rm /etc/nginx/sites-enabled/default
+fi
+
 sudo tee "$config_path" > /dev/null <<EOF
 server { 
     listen 80;
