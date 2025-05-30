@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# Prompt for domain
 read -p "Enter your domain (e.g., panel.example.com): " domain
 
-# Nginx config file path
 config_path="/etc/nginx/sites-available/pterodactyl.conf"
 
-# Write the Nginx config with the domain inserted
 sudo tee "$config_path" > /dev/null <<EOF
 server { 
     listen 80;
@@ -71,7 +68,6 @@ server {
 }
 EOF
 
-# Enable the config and reload Nginx
 sudo ln -s /etc/nginx/sites-available/pterodactyl.conf /etc/nginx/sites-enabled/pterodactyl.conf
 sudo nginx -t && sudo systemctl reload nginx
 
